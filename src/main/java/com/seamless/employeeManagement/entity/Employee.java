@@ -1,4 +1,5 @@
 package com.seamless.employeeManagement.entity;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -19,13 +20,18 @@ public class Employee {
     @Column(name = "email")
     private String email;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "address_id", referencedColumnName = "id")
+    private Address address;
+
     // Constructors --------------------------------------
     public Employee(){}
 
-    public Employee(String first_name, String last_name, String email) {
+    public Employee(String first_name, String last_name, String email, Address address) {
         this.first_name = first_name;
         this.last_name = last_name;
         this.email = email;
+        this.address = address;
     }
 
     // Getters --------------------------------------
@@ -45,6 +51,10 @@ public class Employee {
         return email;
     }
 
+    public Address getAddress() {
+        return address;
+    }
+
     // Setters --------------------------------------
     public void setId(int id) {
         this.id = id;
@@ -62,7 +72,12 @@ public class Employee {
         this.email = email;
     }
 
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
     // to String Method --------------------------------------
+
     @Override
     public String toString() {
         return "Employee{" +
@@ -70,6 +85,9 @@ public class Employee {
                 ", first_name='" + first_name + '\'' +
                 ", last_name='" + last_name + '\'' +
                 ", email='" + email + '\'' +
+                ", address=" + address +
                 '}';
     }
+
+
 }
