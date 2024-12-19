@@ -1,6 +1,5 @@
-//package com.seamless.employeeManagement.rest;
+//package com.seamless.employeeManagement.service;
 //import com.seamless.employeeManagement.entity.Employee;
-//import com.seamless.employeeManagement.service.EmployeeService;
 //import org.springframework.web.bind.annotation.*;
 //
 //import java.util.List;
