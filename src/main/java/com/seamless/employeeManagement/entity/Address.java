@@ -22,18 +22,19 @@ public class Address {
     @Column(name = "phoneNo")
     private String phoneNo;
 
-//    @ManyToOne
-//    @JoinColumn(name = "employee_id", referencedColumnName = "id")
-//    private Employee employee;
+    @ManyToOne
+    @JoinColumn(name = "employee_id", nullable = false)
+    private Employee employee;
 
     // Constructors
     public Address(){}
 
-    public Address(String country, String city, int street, String phoneNo) {
+    public Address(String country, String city, int street, String phoneNo, Employee employee) {
         this.country = country;
         this.city = city;
         this.street = street;
         this.phoneNo = phoneNo;
+        this.employee = employee;
     }
 
     // Getter & Setters
@@ -58,9 +59,9 @@ public class Address {
         return city;
     }
 
-//    public Employee getEmployee() {
-//        return employee;
-//    }
+    public Employee getEmployee() {
+        return employee;
+    }
 
     public void setCity(String city) {
         this.city = city;
@@ -82,9 +83,9 @@ public class Address {
         this.country = country;
     }
 
-//    public void setEmployee(Employee employee){
-//        this.employee = employee;
-//    }
+    public void setEmployee(Employee employee){
+        this.employee = employee;
+    }
 
     // to string method
     @Override

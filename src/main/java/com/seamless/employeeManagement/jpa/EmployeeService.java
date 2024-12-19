@@ -1,5 +1,6 @@
 package com.seamless.employeeManagement.jpa;
 
+import com.seamless.employeeManagement.entity.Address;
 import com.seamless.employeeManagement.entity.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,6 +13,14 @@ public class EmployeeService {
 
     @Autowired
     private EmployeeRepository employeeRepository;
+
+    @Autowired
+    private AddressRepository addressRepository;
+
+    public EmployeeService(EmployeeRepository employeeRepository, AddressRepository addressRepository){
+        this.employeeRepository = employeeRepository;
+        this.addressRepository = addressRepository;
+    }
 
     public List<Employee> getAllEmployees() {
         return employeeRepository.findAll();

@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 
 import java.util.List;
 
+
 @Entity
 @Table(name = "employee")
 public class Employee {
@@ -22,17 +23,17 @@ public class Employee {
     @Column(name = "email")
     private String email;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "address_id", referencedColumnName = "id")
-    private Address address;
+//    @OneToOne(cascade = CascadeType.ALL)
+//    @JoinColumn(name = "address_id", referencedColumnName = "id")
+//    private Address address;
 
-//    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
-//    private List<Address> address;
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "employee")
+    private List<Address> address;
 
     // Constructors --------------------------------------
     public Employee(){}
 
-    public Employee(String first_name, String last_name, String email, Address address) {
+    public Employee(String first_name, String last_name, String email, List<Address> address) {
         this.first_name = first_name;
         this.last_name = last_name;
         this.email = email;
@@ -56,13 +57,13 @@ public class Employee {
         return email;
     }
 
-    public Address getAddress() {
-        return address;
-    }
-
-//    public List<Address> getAddress() {
+//    public Address getAddress() {
 //        return address;
 //    }
+
+    public List<Address> getAddress() {
+        return address;
+    }
 
     // Setters --------------------------------------
     public void setId(int id) {
@@ -81,13 +82,13 @@ public class Employee {
         this.email = email;
     }
 
-    public void setAddress(Address address) {
-        this.address = address;
-    }
-
-//    public void setAddress(List<Address> address) {
+//    public void setAddress(Address address) {
 //        this.address = address;
 //    }
+
+    public void setAddress(List<Address> address) {
+        this.address = address;
+    }
 
     // to String Method --------------------------------------
     @Override
