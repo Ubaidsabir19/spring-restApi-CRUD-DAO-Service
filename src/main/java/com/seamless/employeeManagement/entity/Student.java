@@ -1,42 +1,19 @@
 package com.seamless.employeeManagement.entity;
 
-import jakarta.persistence.*;
+public class Student {
 
-import java.util.List;
-
-@Entity
-@Table(name = "employee")
-public class Employee {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     private int id;
-
-    @Column(name = "first_name")
     private String first_name;
-
-    @Column(name = "last_name")
     private String last_name;
-
-    @Column(name = "email")
     private String email;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "address_id", referencedColumnName = "id")
-    private Address address;
-
-//    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
-//    private List<Address> address;
-
     // Constructors --------------------------------------
-    public Employee(){}
+    public Student(){}
 
-    public Employee(String first_name, String last_name, String email, Address address) {
+    public Student(String first_name, String last_name, String email) {
         this.first_name = first_name;
         this.last_name = last_name;
         this.email = email;
-        this.address = address;
     }
 
     // Getters --------------------------------------
@@ -56,14 +33,6 @@ public class Employee {
         return email;
     }
 
-    public Address getAddress() {
-        return address;
-    }
-
-//    public List<Address> getAddress() {
-//        return address;
-//    }
-
     // Setters --------------------------------------
     public void setId(int id) {
         this.id = id;
@@ -81,25 +50,14 @@ public class Employee {
         this.email = email;
     }
 
-    public void setAddress(Address address) {
-        this.address = address;
-    }
-
-//    public void setAddress(List<Address> address) {
-//        this.address = address;
-//    }
-
     // to String Method --------------------------------------
     @Override
     public String toString() {
-        return "Employee{" +
+        return "Student{" +
                 "id=" + id +
                 ", first_name='" + first_name + '\'' +
                 ", last_name='" + last_name + '\'' +
                 ", email='" + email + '\'' +
-                ", address=" + address +
                 '}';
     }
-
-
 }

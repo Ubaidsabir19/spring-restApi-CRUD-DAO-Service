@@ -22,6 +22,10 @@ public class Address {
     @Column(name = "phoneNo")
     private String phoneNo;
 
+//    @ManyToOne
+//    @JoinColumn(name = "employee_id", referencedColumnName = "id")
+//    private Employee employee;
+
     // Constructors
     public Address(){}
 
@@ -54,6 +58,10 @@ public class Address {
         return city;
     }
 
+//    public Employee getEmployee() {
+//        return employee;
+//    }
+
     public void setCity(String city) {
         this.city = city;
     }
@@ -74,8 +82,11 @@ public class Address {
         this.country = country;
     }
 
-    // to string method
+//    public void setEmployee(Employee employee){
+//        this.employee = employee;
+//    }
 
+    // to string method
     @Override
     public String toString() {
         return "Address{" +
