@@ -1,7 +1,9 @@
 package com.seamless.employeeManagement.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -10,7 +12,7 @@ import java.util.List;
 public class Employee {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // used for unique value
     @Column(name = "id")
     private int id;
 
@@ -23,12 +25,26 @@ public class Employee {
     @Column(name = "email")
     private String email;
 
-//    @OneToOne(cascade = CascadeType.ALL)
-//    @JoinColumn(name = "address_id", referencedColumnName = "id")
-//    private Address address;
+/*  One-to-one relationship
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "address_id", referencedColumnName = "id")
+    private Address address;
+*/
+
+    /*  One-to-Many relationship */
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "employee")
+    @JsonManagedReference
     private List<Address> address;
+
+    /*  Many-to-Many relationship */
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+    @JoinTable(
+            name = "employee_department",
+            joinColumns = @JoinColumn(name = "employee_id"),
+            inverseJoinColumns = @JoinColumn(name = "department_id")
+    )
+    private List<Department> departments = new ArrayList<>();
 
     // Constructors --------------------------------------
     public Employee(){}
@@ -40,7 +56,7 @@ public class Employee {
         this.address = address;
     }
 
-    // Getters --------------------------------------
+    // Getters -------------------------------------------
     public int getId() {
         return id;
     }
@@ -90,7 +106,15 @@ public class Employee {
         this.address = address;
     }
 
-    // to String Method --------------------------------------
+    public List<Department> getDepartments() {
+        return departments;
+    }
+
+    public void setDepartments(List<Department> departments) {
+        this.departments = departments;
+    }
+
+    // to String Method ---------------------------------------
     @Override
     public String toString() {
         return "Employee{" +
@@ -99,8 +123,7 @@ public class Employee {
                 ", last_name='" + last_name + '\'' +
                 ", email='" + email + '\'' +
                 ", address=" + address +
+                ", departments=" + departments +
                 '}';
     }
-
-
 }

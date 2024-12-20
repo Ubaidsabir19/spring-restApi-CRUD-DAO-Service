@@ -19,3 +19,15 @@ INSERT INTO `employee` VALUES
 	(4,'Yuri','Petrov','yuri@luv2code.com'),
 	(5,'Juan','Vega','juan@luv2code.com');
 
+CREATE TABLE department (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE employee_department (
+    employee_id INT NOT NULL,
+    department_id INT NOT NULL,
+    PRIMARY KEY (employee_id, department_id),
+    FOREIGN KEY (employee_id) REFERENCES employee(id) ON DELETE CASCADE,
+    FOREIGN KEY (department_id) REFERENCES department(id) ON DELETE CASCADE
+);

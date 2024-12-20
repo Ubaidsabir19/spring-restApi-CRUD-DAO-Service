@@ -1,5 +1,6 @@
 package com.seamless.employeeManagement.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 @Entity
@@ -22,8 +23,10 @@ public class Address {
     @Column(name = "phoneNo")
     private String phoneNo;
 
+    /*  Many-to-One relationship */
     @ManyToOne
     @JoinColumn(name = "employee_id", nullable = false)
+    @JsonBackReference
     private Employee employee;
 
     // Constructors
@@ -38,7 +41,6 @@ public class Address {
     }
 
     // Getter & Setters
-
     public int getId() {
         return id;
     }
@@ -96,6 +98,7 @@ public class Address {
                 ", city='" + city + '\'' +
                 ", street=" + street +
                 ", phoneNo='" + phoneNo + '\'' +
+                ", employee=" + employee +
                 '}';
     }
 }
